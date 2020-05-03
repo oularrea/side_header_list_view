@@ -19,6 +19,7 @@ class SideHeaderListView extends StatefulWidget {
   final int itemCount;
   final IndexedWidgetBuilder headerBuilder;
   final IndexedWidgetBuilder itemBuilder;
+  final int scrollToPosition;
   final EdgeInsets padding;
   final HasSameHeader hasSameHeader;
   final itemExtend;
@@ -31,6 +32,7 @@ class SideHeaderListView extends StatefulWidget {
     @required this.itemBuilder,
     @required this.hasSameHeader,
     this.padding,
+    this.scrollToPosition
   })
       : super(key: key);
 
@@ -40,6 +42,38 @@ class SideHeaderListView extends StatefulWidget {
 
 class _SideHeaderListViewState extends State<SideHeaderListView> {
   int currentPosition = 0;
+  var controller = new ScrollController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    controller.addListener(() {
+      var pixels = controller.offset;
+      var newPosition = (pixels / widget.itemExtend).floor();
+
+      if (newPosition != currentPosition) {
+        setState(() {
+          currentPosition = newPosition;
+        });
+      }
+    });
+  }
+
+  @override
+  void didUpdateWidget(SideHeaderListView oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    this._scrollToIndex(widget.scrollToPosition);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +91,7 @@ class _SideHeaderListViewState extends State<SideHeaderListView> {
             padding: widget.padding,
             itemCount: widget.itemCount,
             itemExtent: widget.itemExtend,
-            controller: _getScrollController(),
+            controller: controller,
             itemBuilder: (BuildContext context, int index) {
               return new Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,18 +134,7 @@ class _SideHeaderListViewState extends State<SideHeaderListView> {
     return false;
   }
 
-  ScrollController _getScrollController() {
-    var controller = new ScrollController();
-    controller.addListener(() {
-      var pixels = controller.offset;
-      var newPosition = (pixels / widget.itemExtend).floor();
-
-      if (newPosition != currentPosition) {
-        setState(() {
-          currentPosition = newPosition;
-        });
-      }
-    });
-    return controller;
+  void _scrollToIndex(int i) {
+    controller.animateTo(i * widget.itemExtend, duration: new Duration(seconds: 2), curve: Curves.ease);
   }
 }

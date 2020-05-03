@@ -15,11 +15,15 @@ class MyApp extends StatelessWidget {
 }
 
 class Home extends StatelessWidget {
+
+  int scrollTo = 0;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(title: const Text("HeaderList Demo")),
       body: new SideHeaderListView(
+        scrollToPosition: scrollTo,
         itemCount: names.length,
         padding: new EdgeInsets.all(16.0),
         itemExtend: 48.0,
@@ -38,6 +42,56 @@ class Home extends StatelessWidget {
 }
 
 const names = const <String>[
+  'Annie',
+  'Arianne',
+  'Bertie',
+  'Bettina',
+  'Bradly',
+  'Caridad',
+  'Carline',
+  'Cassie',
+  'Chloe',
+  'Christin',
+  'Clotilde',
+  'Dahlia',
+  'Dana',
+  'Dane',
+  'Darline',
+  'Deena',
+  'Delphia',
+  'Donny',
+  'Echo',
+  'Else',
+  'Ernesto',
+  'Fidel',
+  'Gayla',
+  'Grayce',
+  'Henriette',
+  'Hermila',
+  'Hugo',
+  'Irina',
+  'Ivette',
+  'Jeremiah',
+  'Jerica',
+  'Joan',
+  'Johnna',
+  'Jonah',
+  'Joseph',
+  'Junie',
+  'Linwood',
+  'Lore',
+  'Louis',
+  'Merry',
+  'Minna',
+  'Mitsue',
+  'Napoleon',
+  'Paris',
+  'Ryan',
+  'Salina',
+  'Shantae',
+  'Sonia',
+  'Taisha',
+  'Zula',
   'Annie',
   'Arianne',
   'Bertie',
