@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
 
 class Home extends StatelessWidget {
 
-  int scrollTo = 0;
+  int scrollTo = 50;
 
   @override
   Widget build(BuildContext context) {

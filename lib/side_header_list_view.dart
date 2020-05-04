@@ -60,13 +60,10 @@ class _SideHeaderListViewState extends State<SideHeaderListView> {
       }
     });
 
-    this._scrollToIndex(widget.scrollToPosition);
-
   }
 
   @override
   void didUpdateWidget(SideHeaderListView oldWidget) {
-    // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
     this._scrollToIndex(widget.scrollToPosition);
   }
