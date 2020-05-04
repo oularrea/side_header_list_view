@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:side_header_list_view/side_header_list_view.dart';
 
@@ -14,9 +16,34 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
 
-  int scrollTo = 50;
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int scrollTo = 0;
+  Future time(int time) async {
+
+    Completer c = new Completer();
+    new Timer(new Duration(seconds: time), (){
+      setState(() {
+        scrollTo = 50;
+      });
+      c.complete('done with time out');
+    });
+
+    return c.future;
+  }
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    time(20);
+  }
 
   @override
   Widget build(BuildContext context) {
