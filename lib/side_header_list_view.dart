@@ -59,6 +59,9 @@ class _SideHeaderListViewState extends State<SideHeaderListView> {
         });
       }
     });
+
+    this._scrollToIndex(widget.scrollToPosition);
+
   }
 
   @override
